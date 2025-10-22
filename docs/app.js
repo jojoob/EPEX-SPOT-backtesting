@@ -2,11 +2,15 @@ import { format, parse } from "https://cdn.skypack.dev/date-fns@2.16.1";
 import {
     awattar_neu,
     smartcontrol_neu,
+    smartcontrol_inclgebrauchsabgabe,
     steirerstrom,
     spotty_direkt,
     naturstrom_spot_stunde_ii,
     oekostrom_spot,
-    smartcontrol_sunny } from "./tariffs.js";
+    smartcontrol_sunny,
+    wienenergie_optimaentspanntplus_alt,
+    wienenergie_optimaentspanntplus,
+} from "./tariffs.js";
 import {
     listOfNetzbetreiber,
 } from "./netzbetreiber.js";
@@ -762,7 +766,17 @@ function calculateCosts(h0Sheet, feedin) {
         monthsH0Norm[monthKey] = monthsH0Norm[monthKey].plus(sumH0NormPrice);
         monthsH0NormKwh[monthKey] = monthsH0NormKwh[monthKey].plus(sumH0NormKwh);
     }
-    var tariffs = [awattar_neu, smartcontrol_neu, steirerstrom, spotty_direkt, naturstrom_spot_stunde_ii, oekostrom_spot];
+    var tariffs = [
+        // awattar_neu,
+        // smartcontrol_neu,
+        smartcontrol_inclgebrauchsabgabe,
+        // steirerstrom,
+        // spotty_direkt,
+        // naturstrom_spot_stunde_ii,
+        // oekostrom_spot,
+        wienenergie_optimaentspanntplus_alt,
+        wienenergie_optimaentspanntplus,
+    ];
     if (feedin) {
         tariffs = [smartcontrol_sunny];
     }

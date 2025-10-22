@@ -44,7 +44,20 @@ export const smartcontrol_neu = new Tarif (
         return amount;
     })
 );
-    
+
+export const smartcontrol_inclgebrauchsabgabe = new Tarif (
+    "smartCONTROL ab 2023/10",
+    "https://web.archive.org/web/20231103201719/https://www.smartenergy.at/fileadmin/user_upload/downloads/Kundeninformation_und_Preisblatt_-_smartCONTROL.pdf",
+    "+1.44ct/kWh<br/>+2,99 EUR Grundpreis<br/>inkl. 20% USt. und 6% Gebrauchsabgabe",
+    "+1.44ct/kWh",
+    299,
+    (function (price, kwh, include_monthly_fee, monthly_fee_factor) {
+        let amount = price.plus(kwh.times(1.2)).times(1.2).times(1.06);
+        if (include_monthly_fee) amount = amount.plus(this.grundgebuehr_ct);
+        return amount;
+    })
+);
+
 export const steirerstrom = new Tarif (
     "SteirerStrom Smart", 
     "https://web.archive.org/web/20231103201559/https://www.e-steiermark.com/fileadmin/user_upload/downloads/E-Steiermark_Tarifblatt_Privatkunden_SteirerStrom_Smart.pdf", 
@@ -110,4 +123,30 @@ export const smartcontrol_sunny = new Tarif (
         return price.times(0.8); 
     }),
     true
+);
+
+export const wienenergie_optimaentspanntplus_alt = new Tarif (
+    "OPTIMA Entspannt plus",
+    "",
+    "12,62ct/kWh<br/>+6,1460 EUR Grundpreis<br/>inkl. 20% USt. und 6% Gebrauchsabgabe",
+    "",
+    615,
+    (function (price, kwh, include_monthly_fee, monthly_fee_factor) {
+        let amount = kwh.times(12.62);
+        if (include_monthly_fee) amount = amount.plus(this.grundgebuehr_ct);
+        return amount;
+    })
+);
+
+export const wienenergie_optimaentspanntplus = new Tarif (
+    "OPTIMA Entspannt plus",
+    "",
+    "13,8991ct/kWh<br/>+6,1460 EUR Grundpreis<br/>inkl. 20% USt. und 6% Gebrauchsabgabe",
+    "",
+    615,
+    (function (price, kwh, include_monthly_fee, monthly_fee_factor) {
+        let amount = kwh.times(13.8991);
+        if (include_monthly_fee) amount = amount.plus(this.grundgebuehr_ct);
+        return amount;
+    })
 );
